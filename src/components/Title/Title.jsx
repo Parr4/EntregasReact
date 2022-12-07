@@ -1,3 +1,4 @@
+import ComClass from "../../assets/ComponentesClase/ComClass"
 
  export 
 //  function Title(param){
@@ -17,7 +18,9 @@
     <div>
       <h1>{ titulo }</h1>
       <h2>{ subtitulo }</h2>
+      <ComClass/>
     </div>
+
   )
  }
 

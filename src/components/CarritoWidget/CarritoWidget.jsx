@@ -1,14 +1,12 @@
 
 import {useState} from 'react'
-let valor = 0
+// import {cantidad} from '../BotonCant/BotonCant'
 
-function CarritoWidget() {
-    // const valor = 0
-    const [count, changeCountValue] = useState(1)
+const CarritoWidget = ({cantidad}) => {
+    const [count, changeCountValue] = useState(0)
     const handleCountChanger = () => {
-        changeCountValue(count+1)
+        changeCountValue(count + cantidad)
         console.log(count)
-        valor = count
         // console.log(valor)
       }
 
@@ -16,7 +14,7 @@ function CarritoWidget() {
         <div className="CarritoWidget">
             <img className="icon" src="https://cdn-icons-png.flaticon.com/512/60/60992.png" alt="" />
             <div className="cantidad" >
-                <p className="cantidad">{valor}</p>
+                <p className="cantidad">{count}</p>
 
 
             </div>

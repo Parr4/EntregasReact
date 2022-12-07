@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Title from './components/Title/Title'
 import NavBar from './components/NavBar/NavBar'
 import { ItemListContainer } from './components/ItemListConteiner/ItemListContainer'
 import Footer from './assets/Footer/Footer'
 import Relleno from './assets/Item/Item'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ItemListDetails from './components/ItemListDetails/ItemListDetails'
+import ComClass from './assets/ComponentesClase/ComClass'
+
 // import { AddButton } from './components/CarritoWidget/CarritoWidget'
 
 
@@ -19,35 +24,29 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar/>
-      <Title titulo='Shaman Manga Store' subtitulo='Tu tienda de Mangas'/>
-      <ItemListContainer greeting={'Bienvenido a nuestra tienda, aun estamos trabajando en ella, asi que no esperes mucho de ella'}/>
-      {/* <AddButton/> */}
-      {/* <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Item/>  */}
-      <Relleno/>
-      <Footer/>
+      <BrowserRouter>
+        <NavBar />
+
+        <Routes>
+          <Route path='/' element={<Title titulo='Shaman Manga Store' subtitulo='Tu tienda de Mangas'  />}/>
+
+          <Route path='/catalog' element= { <ItemListContainer greeting={'Bienvenido a nuestra tienda, aun estamos trabajando en ella, asi que no esperes mucho de ella'} />}/>
+
+
+          <Route path='/detail/:productId' element={<ItemListDetails/>}/>
+
+
+          
+          {/* <Route path='*' element={<Navigate to='/'/>}/> */}
+        </Routes>
+
+        {/* <img classname="w-100" src="src/assets/img/shaman-kinghd.jpeg" alt="" /> */}
+        <Footer />
+      </BrowserRouter>
     </div>
   )
 }
 
 export default App
+
+
