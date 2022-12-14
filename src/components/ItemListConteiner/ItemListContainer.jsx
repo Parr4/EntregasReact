@@ -55,7 +55,7 @@ const ItemListContainer = ({ greeting }) => {
               </div>
 
               <div className="card-footer">
-                <Link to={`/detail/${product.franqId}.${product.id}`}>
+                <Link to={`/catalog/detail/${product.franqId}.${product.id}`}>
                   <button className="btn btn-outline-primary btn-block">
                     Ver más
                   </button>
