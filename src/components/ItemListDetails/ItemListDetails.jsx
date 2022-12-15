@@ -1,3 +1,4 @@
+import {collection, doc, getDoc, getDocs, getFirestore, query, where} from 'firebase/firestore'
 import { useEffect } from "react"
 import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
@@ -7,23 +8,37 @@ const ItemListDetails = () => {
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(true)
 
-    const { productId } = useParams()
-    console.log('Id producto: ', productId)
+    
+
+    const { franqId ,productId } = useParams()
+    console.log('Id producto: ', franqId, productId)
 
 
     // usar el useEffect en vez del useState, tira bucle xq esta 2 veces llamado
-    useState(() => {
-        fetch('/objetos.json')
-        .then(response => {
-            return response.json()
-        })
-            // .then(respProduct => setProduct(respProduct[0]))
-            .then(respProd => setProduct(respProd.find(prod => `${prod.franqId}.${prod.id}` == productId)))
-            .catch(err => console.log(err))
-            .finally(() => setLoading(false))
-    })
+    // useState(() => {
+    //     fetch('/objetos.json')
+    //     .then(response => {
+    //         return response.json()
+    //     })
+    //         // .then(respProduct => setProduct(respProduct[0]))
+    //         .then(respProd => setProduct(respProd.find(prod => `${prod.franqId}.${prod.id}` == productId)))
+    //         .catch(err => console.log(err))
+    //         .finally(() => setLoading(false))
+    // })
 
-    console.log('product', product)
+    useEffect(() =>{
+        const db = getFirestore()
+        const queryCollection = collection(db, 'productos')
+    
+        const itemSeleccionado = query(queryCollection, where('franqId', '==', franqId), where('id', '==', productId))
+
+        getDocs(itemSeleccionado)
+        .then(data => setProduct(data.docs.map(products => ({id: products.id, ...products.data()}))))
+        .catch(err => console.log(err))
+        .finally(()=> setLoading(false))
+      }, [franqId, productId])
+
+    console.log('product', product[0])
 
     return (
         // <Link to={`catalog/detail/${product.franqId}.${product.id}`}>
@@ -33,12 +48,12 @@ const ItemListDetails = () => {
           :
             <div className="card w-100 mt-5" >
                 <div className="card-header">
-                    {`catalog/detail/${product.franquicia} ${product.tomo} / ${product.editorial}`}
+                    {`${product[0].franquicia} ${product[0].tomo} / ${product[0].editorial}`}
                 </div>
                 <div className="card-body">
-                    <img src={`/src/assets/img/${product.franquicia}/${product.tomo}.jpg`} alt='' className='w-50' />
-                    {product.price}
-                    <p>Stock disponible: {product.stock}</p>
+                    <img src={`/src/assets/img/${product[0].franquicia}/${product[0].tomo}.jpg`} alt='' className='w-50' />
+                    {product[0].price}
+                    <p>Stock disponible: {product[0].stock}</p>
                 </div>
                 <div className="card-footer">
                     <button className="btn btn-outline-primary btn-block">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import ComClass from "../../assets/ComponentesClase/ComClass"
 
  export 
@@ -18,7 +19,10 @@ import ComClass from "../../assets/ComponentesClase/ComClass"
     <div>
       <h1>{ titulo }</h1>
       <h2>{ subtitulo }</h2>
+
       <ComClass/>
+
+
     </div>
 
   )
