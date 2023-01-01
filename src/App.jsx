@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
@@ -10,6 +10,7 @@ import Relleno from './assets/Item/Item'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemListDetails from './components/ItemListDetails/ItemListDetails'
 import ComClass from './assets/ComponentesClase/ComClass'
+import CatalogImport from './components/FetchCatalog/FetchCatalog'
 
 // import { AddButton } from './components/CarritoWidget/CarritoWidget'
 
@@ -19,14 +20,16 @@ import ComClass from './assets/ComponentesClase/ComClass'
 
 
 function App() {
+
   // const [count, setCount] = useState(0)
   // let titleApp = 'Titulo de app'
+  <getCatalogProducts/>
 
   return (
     <div className="App">
       <BrowserRouter>
         <NavBar />
-
+        <CatalogImport/>
         <Routes>
           <Route path='/' element={<Title titulo='Shaman Manga Store' subtitulo='Tu tienda de Mangas'  />}/>
           <Route path='/catalog' element= { <ItemListContainer greeting={'Bienvenido a nuestra tienda, aun estamos trabajando en ella, asi que no esperes mucho de ella'} />}/>
@@ -36,7 +39,7 @@ function App() {
         </Routes>
 
         {/* <img classname="w-100" src="src/assets/img/shaman-kinghd.jpeg" alt="" /> */}
-        <Footer />
+        <Footer/>
       </BrowserRouter>
     </div>
   )

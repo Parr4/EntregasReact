@@ -5,6 +5,7 @@
 
 nav {
   width: 100vw;
+  overflow: hidden;
   justify-content: center;
   position: sticky;
   top: 0;
@@ -58,6 +59,7 @@ footer{
 body{
   justify-content: center;
   width: 100vw;
+  overflow-x: hidden;
   color: white;
 }
 
@@ -82,4 +84,27 @@ label{
 
 .relleno{
   padding-top: 700px;
+}
+.itemList{
+  margin: 0;
+  padding: 0;
+  justify-items: center;
+  width: 100vw;
+  overflow:hidden;
+
+}
+
+.container{
+  margin: 0;
+  padding: 0;
+  place-items: center;
+
+}
+.row{
+  display: flex;
+  justify-content: center;
+}
+
+.card{
+  margin: 10px;
 }

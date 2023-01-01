@@ -1,21 +1,47 @@
 
 import { useState, useEffect } from 'react'
+// import './itemListContainer.css'
 import { Link, useParams } from 'react-router-dom'
-import {collection, doc, getDoc, getDocs, getFirestore, query, where, } from 'firebase/firestore'
+import Container from 'react-bootstrap/Container';
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, } from 'firebase/firestore'
 // import FetchCatalog from '../FetchCatalog/FetchCatalog'
 import ItemListDetails from '../ItemListDetails/ItemListDetails'
+import { Button, Card } from 'react-bootstrap'
+import AddCartButton from '../AddCartButton/AddCartButton';
+// import CatalogImport from '../FetchCatalog/FetchCatalog';
+import { useCatalog } from '../FetchCatalog/FetchUse';
 // import { gFetch } from '../../helpers/gFetch'
 const products = []
 
+// const addOrder = () => {
 
+//   const order = {}
+//   order.buyer = { name: 'fco', phone: '123', mail: 'pdp@gmail.com' }
+//   order.price = precioTotal()
+//   order.items = cartList.map(({ id, price, name }) => (a))
+
+//   const db = getFirestore()
+//   const queryCollection = collection(db, 'orders')
+
+//   // addDoc(queryCollection)
+//   // .then(resp = console.log(resp))
+//   // .catch(err => console.log(err))
+//   // .finally("hola")
+//   // console.log("Comprando")
+
+//   const queryDoc = doc(db, 'productos', '')
+//   updateDoc(queryDoc)
+// }
 
 const ItemListContainer = ({ greeting }) => {
+  const {products, error, loading} = useCatalog()
+  console.log(products)
 
-  const [products, setProduct] = useState([])
-  const [loading, setLoading] = useState(true)
+  // const [products, setProduct] = useState([])
+  // const [loading, setLoading] = useState(true)
 
 
-    const {franqId} = useParams()
+  // const { franqId } = useParams()
 
   // useEffect(() => {
   //   fetch('./objetos.json')
@@ -40,71 +66,70 @@ const ItemListContainer = ({ greeting }) => {
 
   // })
 
-  useEffect(() =>{
-    const db = getFirestore()
-    const queryCollection = collection(db, 'productos')
+  // useEffect(() => {
+  //   const db = getFirestore()
+  //   const queryCollection = collection(db, 'productos')
 
 
 
-    if (franqId == null){
-      getDocs(queryCollection)
-      .then(data => setProduct(data.docs.map(products => ({id: products.id, ...products.data()}))))
-      .catch(err => console.log(err))
-      .finally(()=> setLoading(false))
-    } else {
-      const listaFiltrada = query(queryCollection, where('franqId', '==', franqId))
-      getDocs(listaFiltrada)
-      .then(data => setProduct(data.docs.map(products => ({id: products.id, ...products.data()}))))
-      .catch(err => console.log(err))
-      .finally(()=> setLoading(false))
-    }}, [franqId])
+  //   if (franqId == null) {
+  //     getDocs(queryCollection)
+  //       .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
+  //       .catch(err => console.log(err))
+  //       .finally(() => setLoading(false))
+  //   } else {
+  //     const listaFiltrada = query(queryCollection, where('franqId', '==', franqId))
+  //     getDocs(listaFiltrada)
+  //       .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
+  //       .catch(err => console.log(err))
+  //       .finally(() => setLoading(false))
+  //   }
+  // }, [franqId])
+
 
 
 
 
 
   setTimeout(() => {
-    console.log(products);
+    console.log(products)
+    // setLoading(false);
   }, "1000")
 
 
 
-
+  // const productos = CatalogImport
+  console.log(products)
 
 
   return (
-    <section>
-      <label>{greeting}</label>
+    <section className='itemList'>
+      <label className='label'>{greeting}</label>
+      <Container fluid className='row'>
 
         {loading ?
           <h2>Cargando Productos!</h2>
           :
           products.map(product => <div
-            style={{ marginLeft: 100 }}
-            className='col-md-3'
+            style={{ justifyContent: 'center' }}
+            className='card col-lg-2 col-md-4 col-sm-6 col-6'
             key={`${product.id} + . + ${product.franqId}`}
           >
-            <div className="card w-100 mt-5" >
-              <div className="card-header">
-                {`${product.franquicia} ${product.tomo} / ${product.editorial}`}
-              </div>
-              <div className="card-body">
-                <img src={`/src/assets/img/${product.franquicia}/${product.tomo}.jpg`} alt='' className='w-50' />
-                {product.price}
-                <p>Stock disponible: {product.stock}</p>
-              </div>
+            <Card >
+              <Card.Img variant="top" src={`/src/assets/img/${product.franquicia}/${product.tomo}.jpg`} />
+              <Card.Header as="p">{product.editorial}</Card.Header>
+              <Card.Body>
 
-              <div className="card-footer">
-                <Link to={`/catalog/${product.franqId}/${product.id}`}>
-                  <button className="btn btn-outline-primary btn-block">
-                    Ver más
-                  </button>
-                </Link>
-                <button className="btn btn-outline-primary btn-block">
-                  Agregar al carrito
-                </button >
-              </div>
-            </div>
+                <Card.Title>{product.franquicia} {product.tomo}</Card.Title>
+                <Card.Text>
+                  Precio: {product.precio}
+                  <br />
+                  Stock disponible: {product.stock}
+                </Card.Text>
+                <Link to={`/catalog/${product.franqId}/${product.id}`}><Button variant="primary">Ver Producto</Button></Link>
+                <AddCartButton productPassed={product}/>
+              </Card.Body>
+            </Card>
 
 
           </div>
@@ -113,9 +138,10 @@ const ItemListContainer = ({ greeting }) => {
           )
         }
 
-
+      </Container>
 
     </section>
+
   )
 }
 
