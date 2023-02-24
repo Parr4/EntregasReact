@@ -7,6 +7,7 @@ import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDo
 // import FetchCatalog from '../FetchCatalog/FetchCatalog'
 import ItemListDetails from '../ItemListDetails/ItemListDetails'
 import { Button, Card } from 'react-bootstrap'
+<<<<<<< HEAD
 // import { gFetch } from '../../helpers/gFetch'
 const products = []
 
@@ -29,14 +30,47 @@ const addOrder = () => {
   const queryDoc = doc(db, 'productos', '')
   updateDoc(queryDoc)
 }
+=======
+import AddCartButton from '../AddCartButton/AddCartButton';
+// import CatalogImport from '../FetchCatalog/FetchCatalog';
+import { useCatalog } from '../FetchCatalog/FetchUse';
+// import { gFetch } from '../../helpers/gFetch'
+const products = []
+
+// const addOrder = () => {
+
+//   const order = {}
+//   order.buyer = { name: 'fco', phone: '123', mail: 'pdp@gmail.com' }
+//   order.price = precioTotal()
+//   order.items = cartList.map(({ id, price, name }) => (a))
+
+//   const db = getFirestore()
+//   const queryCollection = collection(db, 'orders')
+
+//   // addDoc(queryCollection)
+//   // .then(resp = console.log(resp))
+//   // .catch(err => console.log(err))
+//   // .finally("hola")
+//   // console.log("Comprando")
+
+//   const queryDoc = doc(db, 'productos', '')
+//   updateDoc(queryDoc)
+// }
+>>>>>>> da4a83cc4a869dcabe0887836e7aceb6a84c5935
 
 const ItemListContainer = ({ greeting }) => {
+  const {products, error, loading} = useCatalog()
+  console.log(products)
 
-  const [products, setProduct] = useState([])
-  const [loading, setLoading] = useState(true)
+  // const [products, setProduct] = useState([])
+  // const [loading, setLoading] = useState(true)
 
 
+<<<<<<< HEAD
   const { franqId } = useParams()
+=======
+  // const { franqId } = useParams()
+>>>>>>> da4a83cc4a869dcabe0887836e7aceb6a84c5935
 
   // useEffect(() => {
   //   fetch('./objetos.json')
@@ -61,6 +95,7 @@ const ItemListContainer = ({ greeting }) => {
 
   // })
 
+<<<<<<< HEAD
   useEffect(() => {
     const db = getFirestore()
     const queryCollection = collection(db, 'productos')
@@ -84,6 +119,27 @@ const ItemListContainer = ({ greeting }) => {
     }
   }, [franqId])
 
+=======
+  // useEffect(() => {
+  //   const db = getFirestore()
+  //   const queryCollection = collection(db, 'productos')
+
+
+
+  //   if (franqId == null) {
+  //     getDocs(queryCollection)
+  //       .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
+  //       .catch(err => console.log(err))
+  //       .finally(() => setLoading(false))
+  //   } else {
+  //     const listaFiltrada = query(queryCollection, where('franqId', '==', franqId))
+  //     getDocs(listaFiltrada)
+  //       .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
+  //       .catch(err => console.log(err))
+  //       .finally(() => setLoading(false))
+  //   }
+  // }, [franqId])
+>>>>>>> da4a83cc4a869dcabe0887836e7aceb6a84c5935
 
 
 
@@ -91,12 +147,14 @@ const ItemListContainer = ({ greeting }) => {
 
 
   setTimeout(() => {
-    console.log(products);
+    console.log(products)
+    // setLoading(false);
   }, "1000")
 
 
 
-
+  // const productos = CatalogImport
+  console.log(products)
 
 
   return (
@@ -124,7 +182,11 @@ const ItemListContainer = ({ greeting }) => {
                   Stock disponible: {product.stock}
                 </Card.Text>
                 <Link to={`/catalog/${product.franqId}/${product.id}`}><Button variant="primary">Ver Producto</Button></Link>
+<<<<<<< HEAD
                 <Button>Añadir al carrito</Button>
+=======
+                <AddCartButton productPassed={product}/>
+>>>>>>> da4a83cc4a869dcabe0887836e7aceb6a84c5935
               </Card.Body>
             </Card>
 

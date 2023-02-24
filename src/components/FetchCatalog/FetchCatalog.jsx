@@ -1,25 +1,39 @@
-// import {useEffect, useState, useRef} from 'react';
+// import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, } from 'firebase/firestore'
+// import { useState, useEffect } from 'react'
+// import { useParams } from 'react-router-dom'
 
-  
-//   const FetchCatalog = () => {
-  
-//     const [products, setProduct] = useState([])
-//     const [loading, setLoading] = useState(true)
-  
-//     useEffect(() => {
-//       fetch('./objetos.json')// consulta a un api pero solo simulación 
-//         .then(response => {
-//           return response.json()
-//         })
-//         .then(data => setProduct(data))
-//         .then(data => console.log(data))
+const CatalogImport = () =>{"hola"}
+
+//   const [products, setProduct] = useState([])
+//   const [loading, setLoading] = useState(true)
+
+
+//   const { franqId } = useParams()
+
+
+//   useEffect(() => {
+//     const db = getFirestore()
+//     const queryCollection = collection(db, 'productos')
+
+
+
+//     if (franqId == null) {
+//       getDocs(queryCollection)
+//         .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
 //         .catch(err => console.log(err))
-//         .finally(() => console.log(products))
 //         .finally(() => setLoading(false))
-//     }, [])
+//     } else {
+//       const listaFiltrada = query(queryCollection, where('franqId', '==', franqId))
+//       getDocs(listaFiltrada)
+//         .then(data => setProduct(data.docs.map(products => ({ id: products.id, ...products.data() }))))
+//         .catch(err => console.log(err))
+//         .finally(() => setLoading(false))
+//     }
+//   }, [franqId])
 
-//     return(
-//         {products.map(products => )}
-//     )
+  
+//   console.log({products})
 // }
-// export default FetchCatalog
+
+export default CatalogImport
+

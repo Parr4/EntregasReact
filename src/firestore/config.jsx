@@ -16,4 +16,3 @@ const app = initializeApp(firebaseConfig)
 export const InitFirestoreApp = () => {
     return app
 }
-
