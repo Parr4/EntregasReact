@@ -52,7 +52,7 @@ const ItemListDetails = () => {
                 </div>
                 <div className="card-body">
                     <img src={`/src/assets/img/${product[0].franquicia}/${product[0].tomo}.jpg`} alt='' className='w-50' />
-                    {product[0].price}
+                    {product[0].precio}
                     <p>Stock disponible: {product[0].stock}</p>
                 </div>
                 <div className="card-footer">
